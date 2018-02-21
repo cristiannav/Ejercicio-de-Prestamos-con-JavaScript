@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <meta name="description" content=""/>
+    <link rel="stylesheet" href="css/style.css">
+    <title> Prestamos.com </title>
+
+  <!--Script-->
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="funciones.js"></script>
+
+  </head>
+
+<!--Body Header Menu-->
+  <body onload="getData()">
+    <header>
+      <div class="header">
+        <h1> PRESTAMOS.COM </h1>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li class="inicio">
+            <a href="./index.html"> <strong> INICIO </strong> </a>
+          </li>
+          <li class="calculoPrestamos">
+            <a href="./calculo.html"> <strong> CALCULO DE PRESTAMOS </strong> </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+<!--Main-->
+
+    <section class="calculoPrest">
+      <div class="calculoPrest2">
+        <h2> Cálculo de préstamos </h2>
+        <p> Calćulo de Préstamos - Para el cálculo de préstamos, esta calculadora le permite </br>
+            calcular la cuota mensual a pagar en su préstamo, así como el total de intereses. </p>
+        </div>
+    </section>
+    <form>
+      <label for="importe"> Importe: </label>
+      <input type="text/javascript" id="importe" placeholder="Cantidad">
+
+      <label for="provincia"> Provincia: </label> </br>
+      <select name="provincia" id="provincia"> </select> </br></br>
+
+      <label for="taza"> Taza de interés: % </label>
+      <input type="text/javascript" id="taza" placeholder="Porcentaje">
+
+      <input type="button" value="Calcular" id="calcular">
+      <input type="reset" value="Borrar" id="borrar">
+
+      <script>
+
+      (function(){
+
+        var cuota = document.getElementById('cuota');
+
+        var resolver = function(){
+            var operacion1 = 0;
+            var operacion2 = 0;
+            var importe = document.getElementById('importe').value;
+            var taza = document.getElementById('taza').value;
+            var operacion1 = (parseInt(importe) * parseInt(taza)) / 100;
+            var operacion2 = (parseInt(importe) + parseInt(operacion1));
+            document.getElementById('total').innerHTML = parseInt(operacion2);
+
+            var operacion3 = (parseInt(operacion2) / 12);
+            document.getElementById('cuota').innerHTML = parseInt(operacion3);
+
+            if(importe == null || importe == undefined || importe == "" || taza == null || taza == undefined || taza == ""){
+              document.getElementById('total').innerHTML = "";
+              document.getElementById('cuota').innerHTML = "";
+            }
+          };
+
+        var borrarCalc = function(){
+            document.getElementById('total').innerHTML = "";
+            document.getElementById('cuota').innerHTML = "";
+        }
+
+        var Calcular = document.getElementById('calcular');
+        Calcular.addEventListener("click", resolver);
+
+        var Borrar = document.getElementById('borrar');
+        Borrar.addEventListener("click", borrarCalc);
+
+      }())
+
+      </script>
+
+      <p class="cuotaMensual"> Cuota mensual </p>
+      <p id="cuota"></p>
+
+      <p class="totalPagar"> Total a pagar </p>
+      <p id="total"></p>
+    </form>
+
+  </body>
+</html>
